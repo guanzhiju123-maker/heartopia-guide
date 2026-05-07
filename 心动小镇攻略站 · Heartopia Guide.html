@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>心动小镇攻略站 · Heartopia Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #e8637a;
+    --pink-light: #fde8ec;
+    --pink-mid: #f5a8b5;
+    --peach: #f9c8a0;
+    --peach-light: #fef3e8;
+    --mint: #7ecaac;
+    --mint-light: #e5f6f0;
+    --sky: #89c4e1;
+    --sky-light: #e8f5fb;
+    --lavender: #b8a9e0;
+    --lavender-light: #f0edfa;
+    --cream: #fdf8f2;
+    --text-dark: #2d1f1f;
+    --text-mid: #6b4e4e;
+    --text-light: #a08585;
+    --border: #f0dede;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header {
+    background: #fff;
+    border-bottom: 1.5px solid var(--border);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--pink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .logo-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--pink);
+    letter-spacing: 0.02em;
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin-top: 1px;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  nav a {
+    font-size: 13.5px;
+    color: var(--text-mid);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--pink); }
+  nav a.active { color: var(--pink); font-weight: 500; }
+
+  .nav-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: text;
+    min-width: 160px;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #fff5f7 0%, #fef3e8 50%, #e8f5fb 100%);
+    padding: 64px 2rem 56px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(232,99,122,0.06);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(137,196,225,0.08);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--pink-light);
+    color: var(--pink);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 0.03em;
+  }
+
+  .hero h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 span { color: var(--pink); }
+
+  .hero p {
+    font-size: 15px;
+    color: var(--text-mid);
+    max-width: 520px;
+    margin: 0 auto 32px;
+    line-height: 1.8;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-search {
+    display: flex;
+    align-items: center;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 40px;
+    padding: 6px 6px 6px 20px;
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba(232,99,122,0.08);
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: var(--text-dark);
+    background: transparent;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+
+  .hero-search input::placeholder { color: var(--text-light); }
+
+  .hero-search button {
+    background: var(--pink);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 9px 20px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .hero-search button:hover { background: #d4556c; }
+
+  /* Daily bar */
+  .daily-bar {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .daily-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-mid);
+  }
+
+  .daily-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  .daily-label { color: var(--text-light); font-size: 12px; margin-right: 2px; }
+  .daily-value { font-weight: 500; color: var(--text-dark); }
+
+  .reset-timer {
+    background: var(--pink-light);
+    color: var(--pink);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Main */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 2rem 80px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+  }
+
+  .section-sub {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  /* Quick cards (4 pillars) */
+  .quick-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+
+  .quick-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    cursor: pointer;
+  }
+
+  .quick-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+    border-color: var(--pink-mid);
+  }
+
+  .quick-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 2px;
+  }
+
+  .quick-card h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+
+  .quick-card p {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .quick-card .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+    margin-top: auto;
+  }
+
+  /* Two column layout */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  /* Guide list */
+  .guide-list {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .guide-list-header {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .guide-list-header h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .view-all {
+    font-size: 12px;
+    color: var(--pink);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .guide-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+
+  .guide-item:last-child { border-bottom: none; }
+  .guide-item:hover { background: var(--cream); }
+
+  .guide-item-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .guide-item-info { flex: 1; }
+
+  .guide-item-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+  }
+
+  .guide-item-desc {
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  .guide-item-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* Sidebar */
+  .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+  .sidebar-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .sidebar-card-header {
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  /* Hobbies grid */
+  .hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .hobby-cell {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 14px 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+  }
+
+  .hobby-cell:hover { background: var(--cream); }
+
+  .hobby-emoji { font-size: 22px; }
+
+  .hobby-name {
+    font-size: 11px;
+    color: var(--text-mid);
+    font-weight: 400;
+    text-align: center;
+  }
+
+  /* DG levels */
+  .dg-list { padding: 4px 0; }
+
+  .dg-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dg-item:last-child { border-bottom: none; }
+
+  .dg-level {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--pink-light);
+    color: var(--pink);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .dg-info { flex: 1; }
+
+  .dg-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+
+  .dg-medals {
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  /* Tips section */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .tip-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tip-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-light);
+    letter-spacing: 0.08em;
+  }
+
+  .tip-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+    line-height: 1.4;
+  }
+
+  .tip-body {
+    font-size: 12.5px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* Codes card */
+  .codes-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .codes-header h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .code-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .code-item:last-child { border-bottom: none; }
+
+  .code-text {
+    font-family: monospace;
+    font-size: 13px;
+    color: var(--text-dark);
+    font-weight: 500;
+    background: var(--cream);
+    padding: 4px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .code-copy {
+    font-size: 11px;
+    color: var(--pink);
+    cursor: pointer;
+    border: 1px solid var(--pink-mid);
+    padding: 3px 10px;
+    border-radius: 10px;
+    background: var(--pink-light);
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+
+  .code-copy:hover { background: var(--pink-mid); color: #fff; }
+
+  .code-reward {
+    font-size: 11.5px;
+    color: var(--text-mid);
+    flex: 1;
+    padding: 0 12px;
+  }
+
+  /* Footer */
+  footer {
+    background: #fff;
+    border-top: 1px solid var(--border);
+    padding: 32px 2rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--pink);
+    margin-bottom: 8px;
+  }
+
+  .footer-text {
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .quick-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    .tips-grid { grid-template-columns: repeat(2, 1fr); }
+    nav { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .quick-grid { grid-template-columns: repeat(2, 1fr); }
+    .tips-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 26px; }
+    .daily-bar { gap: 16px; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <a class="logo" href="#">
+    <div class="logo-icon">🌸</div>
+    <div>
+      <div class="logo-text">心动小镇攻略站</div>
+      <div class="logo-sub">Heartopia Guide · 非官方</div>
+    </div>
+  </a>
+  <nav>
+    <a href="#" class="active">首页</a>
+    <a href="#">新手入门</a>
+    <a href="#">爱好系统</a>
+    <a href="#">图鉴数据库</a>
+    <a href="#">每日攻略</a>
+    <a href="#">礼包码</a>
+  </nav>
+  <div class="nav-search">🔍 &nbsp;搜索攻略...</div>
+</header>
+
+<!-- Daily bar -->
+<div class="daily-bar">
+  <div class="daily-item">
+    <div class="daily-dot" style="background:#89c4e1"></div>
+    <span class="daily-label">今日天气</span>
+    <span class="daily-value" id="weather-display">晴天 ☀️</span>
+  </div>
+  <div class="daily-item">
+    <div class="daily-dot" style="background:#7ecaac"></div>
+    <span class="daily-label">服务器重置</span>
+    <div class="reset-timer">⏱ 距重置 <span id="reset-countdown">--:--:--</span></div>
+  </div>
+  <div class="daily-item">
+    <div class="daily-dot" style="background:#e8637a"></div>
+    <span class="daily-label">今日居民请求</span>
+    <span class="daily-value">5 次 / 每日 50 枚勋章</span>
+  </div>
+  <div class="daily-item">
+    <div class="daily-dot" style="background:#b8a9e0"></div>
+    <span class="daily-label">版本</span>
+    <span class="daily-value">v1.x</span>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">✨ 2026 最新更新</div>
+  <h1>心动小镇<span>攻略全收录</span></h1>
+  <p>从零基础到满级，一站式查询钓鱼、园艺、烹饪攻略，<br>NPC 图鉴、赚钱攻略、礼包码，让你不走弯路</p>
+  <div class="hero-search">
+    <span>🔍</span>
+    <input type="text" placeholder="搜索鱼类、食谱、NPC...">
+    <button>搜索</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- Quick access (4 pillars) -->
+  <div style="margin-bottom: 12px">
+    <div class="section-title">快速导航</div>
+    <div class="section-sub">Heartopia 四大核心系统</div>
+  </div>
+  <div class="quick-grid">
+    <div class="quick-card">
+      <div class="quick-icon" style="background:var(--pink-light)">🎣</div>
+      <h3>钓鱼攻略</h3>
+      <p>94种鱼类位置、时段、天气、稀有度一览</p>
+      <span class="tag" style="background:var(--pink-light);color:var(--pink)">数据库</span>
+    </div>
+    <div class="quick-card">
+      <div class="quick-icon" style="background:var(--mint-light)">🌱</div>
+      <h3>园艺种植</h3>
+      <p>最佳作物推荐、种植周期与利润对比</p>
+      <span class="tag" style="background:var(--mint-light);color:#3a9e78">高利润</span>
+    </div>
+    <div class="quick-card">
+      <div class="quick-icon" style="background:var(--peach-light)">🍳</div>
+      <h3>烹饪食谱</h3>
+      <p>全食谱材料、卖价与利润排行</p>
+      <span class="tag" style="background:var(--peach-light);color:#c07030">赚钱必看</span>
+    </div>
+    <div class="quick-card">
+      <div class="quick-icon" style="background:var(--sky-light)">🏠</div>
+      <h3>家居装饰</h3>
+      <p>家具解锁方式、套装加成、布局参考</p>
+      <span class="tag" style="background:var(--sky-light);color:#3a86b8">创意</span>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="two-col">
+    <!-- Left: guides -->
+    <div>
+      <!-- Beginner guide -->
+      <div class="guide-list" style="margin-bottom:20px">
+        <div class="guide-list-header">
+          <h2>📖 新手入门系列</h2>
+          <a class="view-all" href="#">查看全部 →</a>
+        </div>
+        <div class="guide-item">
+          <div class="guide-item-icon" style="background:var(--pink-light)">🌸</div>
+          <div class="guide-item-info">
+            <div class="guide-item-title">第一天该做什么？新手 Day 1 完整流程</div>
+            <div class="guide-item-desc">角色创建 → 主线推进 → 解锁爱好系统</div>
+          </div>
+          <span class="guide-item-badge" style="background:var(--pink-light);color:var(--pink)">必读</span>
+        </div>
+        <div class="guide-item">
+          <div class="guide-item-icon" style="background:var(--mint-light)">🏅</div>
+          <div class="guide-item-info">
+            <div class="guide-item-title">D.G. 开发者公会等级快速升级攻略</div>
+            <div class="guide-item-desc">每日居民请求 × 5，获得 50 枚勋章最优路线</div>
+          </div>
+          <span class="guide-item-badge" style="background:var(--mint-light);color:#3a9e78">效率</span>
+        </div>
+        <div class="guide-item">
+          <div class="guide-item-icon" style="background:var(--lavender-light)">🎭</div>
+          <div class="guide-item-info">
+            <div class="guide-item-title">身份系统与角色个性选择指南</div>
+            <div class="guide-item-desc">12 种特质、最强搭配组合解析</div>
+          </div>
+          <span class="guide-item-badge" style="background:var(--lavender-light);color:#7060b8"></span>
+        </div>
+        <div class="guide-item">
+          <div class="guide-item-icon" style="background:var(--peach-light)">💰</div>
+          <div class="guide-item-info">
+            <div class="guide-item-title">零基础赚钱攻略：最快积累金币的方法</div>
+            <div class="guide-item-desc">烹饪 + 园艺 + 钓鱼三线并行，加工品售价翻倍</div>
+          </div>
+          <span class="guide-item-badge" style="background:var(--peach-light);color:#c07030">热门</span>
+        </div>
+        <div class="guide-item">
+          <div class="guide-item-icon" style="background:var(--sky-light)">🎮</div>
+          <div class="guide-item-info">
+            <div class="guide-item-title">PC 模拟器手柄操作指南</div>
+            <div class="guide-item-desc">蓝叠 / LD Player 手柄配置完整教程</div>
+          </div>
+          <span class="guide-item-badge" style="background:var(--sky-light);color:#3a86b8">PC 端</span>
+        </div>
+      </div>
+
+      <!-- Tips section -->
+      <div class="section-title" style="margin-bottom:6px">🌟 新手必知 Tips</div>
+      <div class="section-sub">避免这些常见误区，节省大量时间</div>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-num">TIP 01</div>
+          <div class="tip-title">优先推进主线</div>
+          <div class="tip-body">主线解锁约 90% 的游戏内容，先推故事再玩爱好，否则很多功能都开不了。</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num">TIP 02</div>
+          <div class="tip-title">爱好门票要谨慎用</div>
+          <div class="tip-body">爱好扩展券数量有限，先解锁钓鱼和园艺——它们是最稳定的收入来源。</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num">TIP 03</div>
+          <div class="tip-title">每日 5 次居民请求</div>
+          <div class="tip-body">每天完成 5 次居民请求获得 50 枚勋章，是升级 D.G. 等级最稳定的方式。</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num">TIP 04</div>
+          <div class="tip-title">加工品价值翻倍</div>
+          <div class="tip-body">不要直接卖原材料！将食材加工成熟食出售，收益远高于直接出售。</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num">TIP 05</div>
+          <div class="tip-title">重置时间 UTC 06:00</div>
+          <div class="tip-body">服务器每天北京时间 14:00 重置，刷新每日任务和商店，记得卡点操作。</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num">TIP 06</div>
+          <div class="tip-title">钓鱼关注天气稀有鱼</div>
+          <div class="tip-body">彩虹天气下有特殊稀有鱼出没，看到天气预报图标就去钓，高价值。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: sidebar -->
+    <div class="sidebar">
+
+      <!-- 7 hobbies -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">🎯 七大爱好系统</div>
+        <div class="hobbies-grid">
+          <a class="hobby-cell" href="#">
+            <span class="hobby-emoji">🎣</span>
+            <span class="hobby-name">钓鱼</span>
+          </a>
+          <a class="hobby-cell" href="#">
+            <span class="hobby-emoji">🌾</span>
+            <span class="hobby-name">园艺</span>
+          </a>
+          <a class="hobby-cell" href="#">
+            <span class="hobby-emoji">🍳</span>
+            <span class="hobby-name">烹饪</span>
+          </a>
+          <a class="hobby-cell" href="#">
+            <span class="hobby-emoji">🦋</span>
+            <span class="hobby-name">捉虫</span>
+          </a>
+          <a class="hobby-cell" href="#">
+            <span class="hobby-emoji">🐦</span>
+            <span class="hobby-name">观鸟</span>
+          </a>
+          <a class="hobby-cell" href="#">
+            <span class="hobby-emoji">🐱</span>
+            <span class="hobby-name">养猫</span>
+          </a>
+          <a class="hobby-cell" href="#">
+            <span class="hobby-emoji">🐶</span>
+            <span class="hobby-name">养狗</span>
+          </a>
+          <a class="hobby-cell" href="#" style="background:var(--cream)">
+            <span class="hobby-emoji" style="font-size:16px">📋</span>
+            <span class="hobby-name" style="color:var(--pink)">全部攻略</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- D.G. levels quick ref -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">🏅 D.G. 等级参考</div>
+        <div class="dg-list">
+          <div class="dg-item">
+            <div class="dg-level">1</div>
+            <div class="dg-info">
+              <div class="dg-title">见习居民</div>
+              <div class="dg-medals">0 枚 · 解锁基础功能</div>
+            </div>
+          </div>
+          <div class="dg-item">
+            <div class="dg-level">2</div>
+            <div class="dg-info">
+              <div class="dg-title">初级居民</div>
+              <div class="dg-medals">200 枚 · 解锁第 2 个爱好</div>
+            </div>
+          </div>
+          <div class="dg-item">
+            <div class="dg-level">3</div>
+            <div class="dg-info">
+              <div class="dg-title">正式居民</div>
+              <div class="dg-medals">500 枚 · 更多家居蓝图</div>
+            </div>
+          </div>
+          <div class="dg-item">
+            <div class="dg-level">4</div>
+            <div class="dg-info">
+              <div class="dg-title">资深居民</div>
+              <div class="dg-medals">1000 枚 · 解锁高级内容</div>
+            </div>
+          </div>
+          <div class="dg-item" style="border:none">
+            <div class="dg-level" style="background:var(--peach-light);color:#c07030">+</div>
+            <div class="dg-info">
+              <div class="dg-title" style="color:var(--pink)">查看完整等级表 →</div>
+              <div class="dg-medals">更多等级与解锁内容</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Redeem codes -->
+      <div class="sidebar-card">
+        <div class="codes-header">
+          <h2>🎁 最新礼包码</h2>
+          <a class="view-all" href="#">全部 →</a>
+        </div>
+        <div class="code-item">
+          <span class="code-text">HEARTOPIA2026</span>
+          <span class="code-reward">月光水晶 × 50</span>
+          <button class="code-copy" onclick="copyCode(this,'HEARTOPIA2026')">复制</button>
+        </div>
+        <div class="code-item">
+          <span class="code-text">COZYTOWN</span>
+          <span class="code-reward">金币 × 5000</span>
+          <button class="code-copy" onclick="copyCode(this,'COZYTOWN')">复制</button>
+        </div>
+        <div class="code-item">
+          <span class="code-text">XDGAMES2026</span>
+          <span class="code-reward">家具礼盒 × 1</span>
+          <button class="code-copy" onclick="copyCode(this,'XDGAMES2026')">复制</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">🌸 心动小镇攻略站</div>
+  <div class="footer-text">
+    非官方玩家自建攻略站 · 内容基于社区整理<br>
+    Heartopia / 心动小镇 版权归 XD Games 所有
+  </div>
+</footer>
+
+<script>
+  // Reset countdown (UTC 06:00)
+  function updateCountdown() {
+    const now = new Date();
+    const utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+    let reset = new Date(utcNow);
+    reset.setUTCHours(6, 0, 0, 0);
+    if (utcNow >= reset) reset.setUTCDate(reset.getUTCDate() + 1);
+    const diff = reset - utcNow;
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('reset-countdown').textContent =
+      String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Weather rotation (demo)
+  const weathers = ['晴天 ☀️','多云 ⛅','小雨 🌧️','彩虹 🌈'];
+  document.getElementById('weather-display').textContent = weathers[Math.floor(Math.random() * weathers.length)];
+
+  // Copy code
+  function copyCode(btn, code) {
+    navigator.clipboard.writeText(code).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '已复制!';
+      btn.style.background = '#7ecaac';
+      btn.style.borderColor = '#7ecaac';
+      btn.style.color = '#fff';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.style.color = '';
+      }, 1800);
+    });
+  }
+</script>
+</body>
+</html>
